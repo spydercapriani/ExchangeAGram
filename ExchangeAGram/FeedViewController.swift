@@ -24,6 +24,12 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let context:NSManagedObjectContext = appDelegate.managedObjectContext!
         
         feedArray = context.executeFetchRequest(request, error: nil)!
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        viewDidLoad()
+        collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +71,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
         let imageData = UIImageJPEGRepresentation(image, 1.0) // Convert UIImage instance into JPEG representation as NSData item
+        let thumbnailData = UIImageJPEGRepresentation(image, 0.1) // ,Play with image quality e.g. .3)
         
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
@@ -72,6 +79,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         feedItem.image = imageData
         feedItem.caption = "Test Caption"
+        feedItem.thumbnail = thumbnailData
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
