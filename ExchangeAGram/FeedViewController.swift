@@ -37,6 +37,12 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Dispose of any resources that can be recreated.
     }
     
+    // Button Actions
+    
+    @IBAction func profileButtonPressed(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("profileSegue", sender: nil)
+    }
+    
     @IBAction func cameraButtonPressed(sender: UIBarButtonItem) {
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){ // If Camera is available
