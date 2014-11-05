@@ -24,6 +24,10 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func mapViewButtonPressed(sender: UIButton) {
+        performSegueWithIdentifier("mapSegue", sender: nil) // Transition to MapViewController
+    }
+    
     func loginView(loginView: FBLoginView!, handleError error: NSError!) {
         println("Error: \(error.localizedDescription)")
     }
